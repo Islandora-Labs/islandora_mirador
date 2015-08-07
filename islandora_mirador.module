@@ -22,6 +22,14 @@ function islandora_mirador_menu() {
       'file' => 'includes/admin.form.inc',
       'type' => MENU_NORMAL_ITEM,
     ),
+    'islandora/object/%islandora_object/mirador/manifest' => array(
+      'page callback' => 'islandora_mirador_manifest_callback',
+      'page arguments' => array(2),
+      'access callback' => 'islandora_object_access_callback',
+      'access arguments' => array(ISLANDORA_VIEW_OBJECTS, 2),
+      'file' => 'includes/callbacks.inc',
+      'type' => MENU_CALLBACK,
+    ),
   );
 }
 
