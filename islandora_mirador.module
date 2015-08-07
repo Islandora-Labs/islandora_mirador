@@ -12,14 +12,13 @@ define('ISLANDORA_MIRADOR_LIB', 'mirador');
  * Implements hook_menu().
  */
 function islandora_mirador_menu() {
+
   return array(
-    'admin/islandora/islandora_viewers/islandora_mirador' => array(
-      'title' => 'Islandora Mirador',
-      'description' => 'Configure the Islandora Mirador viewer.',
-      'page callback' => 'drupal_get_form',
-      'page arguments' => array('islandora_mirador_admin_settings_form'),
-      'access arguments' => array('administer site configuration'),
-      'file' => 'includes/admin.form.inc',
+    'islandora_mirador' => array(
+      'title' => 'Islandora Mirador Viewer',
+      'page callback' => 'theme',
+      'page arguments' => array('islandora_mirador_viewer'),
+      'access arguments' => array(TRUE),
       'type' => MENU_NORMAL_ITEM,
     ),
     'islandora/object/%islandora_object/mirador/manifest' => array(
@@ -36,7 +35,7 @@ function islandora_mirador_menu() {
 /**
  * Implements hook_theme().
  */
-function islandora_mirador_theme() {
+function islandora_mirador_theme($existing, $type, $theme, $path) {
   return array(
     'islandora_mirador_viewer' => array(
       'file' => 'theme/theme.inc',
@@ -69,30 +68,4 @@ function islandora_mirador_libraries_info() {
       ),
     ),
   );
-}
-
-
-/**
- * Implements hook_islandora_viewer_info().
- */
-function islandora_mirador_islandora_viewer_info() {
-  return array(
-    'islandora_mirador_viewer' => array(
-      'label' => t('Islandora Mirador Viewer'),
-      'description' => t('Mirador viewer rendering using on-the-fly IIIF manifest generation'),
-      'callback' => 'islandora_mirador_viewer',
-      'configuration' => 'admin/islandora/islandora_viewers/islandora_mirador',
-      'model' => array(
-        'islandora:bookCModel',
-        'islandora:newspaperIssueCModel',
-      ),
-    ),
-  );
-}
-
-/**
- * Viewer.
- */
-function islandora_mirador_viewer(array &$params) {
-  return theme('islandora_mirador_viewer', $params);
 }
