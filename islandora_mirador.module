@@ -13,6 +13,15 @@ define('ISLANDORA_MIRADOR_LIB', 'mirador');
  */
 function islandora_mirador_menu() {
   return array(
+    'admin/islandora/islandora_viewers/islandora_mirador' => array(
+      'title' => 'Islandora Mirador',
+      'description' => 'Configure the Islandora Mirador viewer.',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('islandora_mirador_admin_settings_form'),
+      'access arguments' => array('administer site configuration'),
+      'file' => 'includes/admin.form.inc',
+      'type' => MENU_NORMAL_ITEM,
+    ),
   );
 }
 
@@ -60,10 +69,11 @@ function islandora_mirador_libraries_info() {
  */
 function islandora_mirador_islandora_viewer_info() {
   return array(
-    'islandora_mirador' => array(
-      'label' => t('Islandora Mirador'),
+    'islandora_mirador_viewer' => array(
+      'label' => t('Islandora Mirador Viewer'),
       'description' => t('Mirador viewer rendering using on-the-fly IIIF manifest generation'),
       'callback' => 'islandora_mirador_viewer',
+      'configuration' => 'admin/islandora/islandora_viewers/islandora_mirador',
       'model' => array(
         'islandora:bookCModel',
         'islandora:newspaperIssueCModel',
