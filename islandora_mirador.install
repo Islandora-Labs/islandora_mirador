@@ -23,3 +23,14 @@ function islandora_mirador_requirements() {
 
   return $requirements;
 }
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_miradora_uninstall() {
+  $vars = array(
+    'islandora_mirador_layout',
+    'islandora_mirador_url',
+  );
+  array_walk($vars, 'variable_del');
+}
